@@ -11,20 +11,17 @@ const OTPVerification = ({ email, onVerified }) => {
     setError("");
 
     try {
-      const response = await axios.post("/auth/verify-otp", { email, otp });
+      const response = await axios.post("/auth/verify-otp", {
+        email,
+        otp: otp.toString(),
+      });
 
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
-
-        const dashboardRes = await axios.get("/api/dashboard", {
-          headers: {
-            Authorization: `Bearer ${response.data.token}`,
-          },
-        });
-        console.log("Dashboard:", dashboardRes.data);
       }
 
-      onVerified();
+      // ✅ Redirect to login page
+      onVerified(); // This sets page to 'login' in App.jsx
     } catch (err) {
       setError(err.response?.data?.message || "OTP verification failed");
     }

@@ -39,7 +39,7 @@ exports.register = async (req, res) => {
     await sendEmail(email, 'Verify your Email OTP', `Your OTP is: ${otp}`);
 
     res.status(200).json({ message: 'OTP sent to your email' });
-    
+
   } catch (error) {
     console.error('Registration error:', error);
     res.status(500).json({ message: 'Server error during registration' });
@@ -51,10 +51,16 @@ exports.verifyOTP = async (req, res) => {
     const { email, otp } = req.body;
 
     const user = await User.findOne({ email });
+    console.log("Stored OTP:", user.otp);
+    console.log("Received OTP:", otp);
+    console.log("Match:", user.otp === otp);
     if (!user) return res.status(400).json({ message: 'Invalid email' });
     if (user.isVerified) return res.status(400).json({ message: 'User already verified' });
-    if (user.otp !== otp) return res.status(400).json({ message: 'Invalid OTP' });
-    if (Date.now() > user.otpExpires) return res.status(400).json({ message: 'OTP expired' });
+    if (String(user.otp).trim() !== String(otp).trim()) {
+      return res.status(400).json({ message: 'Invalid OTP' });
+    }
+
+    if (new Date() > user.otpExpires) return res.status(400).json({ message: 'OTP expired' });
 
     user.isVerified = true;
     user.otp = null;
@@ -63,7 +69,7 @@ exports.verifyOTP = async (req, res) => {
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
-    res.status(200).json({ message: 'Email verified, please login',token });
+    res.status(200).json({ message: 'Email verified, please login', token });
   } catch (error) {
     res.status(500).json({ message: 'Server error during OTP verification' });
   }

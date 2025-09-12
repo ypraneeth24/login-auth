@@ -33,6 +33,9 @@ html, body, #root {
   font-size: 28px;
   color: #333;
 }
+.register-form p {
+  color: #333;
+}
 
 .subtitle {
   margin-bottom: 30px;
@@ -95,4 +98,18 @@ html, body, #root {
   margin-top: 15px;
   color: red;
   font-size: 14px;
+}
+.login-redirect {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.login-link {
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.login-link:hover {
+  color: #0056b3;
 }
