@@ -1,0 +1,98 @@
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100dvh;
+  background: linear-gradient(to right, #43cea2, #185a9d);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px; /* Prevent edge clipping on small screens */
+  box-sizing: border-box;
+}
+
+.button {
+  margin-right: 10px;
+}
+
+.register-form {
+  background-color: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.register-form h2 {
+  margin-bottom: 10px;
+  font-size: 28px;
+  color: #333;
+}
+
+.subtitle {
+  margin-bottom: 30px;
+  color: #666;
+  font-size: 14px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.input-field:focus {
+  border-color: #43cea2;
+  outline: none;
+}
+
+
+.button-stack {
+  display: flex;
+  flex-direction: column; /* Stack vertically */
+  gap: 12px;               /* Space between buttons */
+  align-items: center;     /* Optional: center horizontally */
+}
+
+.register-button {
+  padding: 10px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.google-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: #333;
+  border-radius: 4px;
+}
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.register-button:hover {
+  background-color: #38bfa0;
+}
+
+.error-message {
+  margin-top: 15px;
+  color: red;
+  font-size: 14px;
+}
