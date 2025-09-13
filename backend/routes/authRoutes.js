@@ -5,6 +5,10 @@ const router = express.Router();
 const { register, verifyOTP, login } = require('../controllers/authController');
 const authMiddleware = require('../middleware/authMiddleware');
 
+const { adminRegister, adminLogin } = require('../controllers/adminController');
+
+router.post('/admin/register', adminRegister);
+router.post('/admin/login', adminLogin);
 router.post('/register', register);
 router.post('/verify-otp', verifyOTP);
 router.post('/login', login);

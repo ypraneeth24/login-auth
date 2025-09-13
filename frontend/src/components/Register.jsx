@@ -68,6 +68,15 @@ const Register = ({ onOtpSent }) => {
             Login
           </span>
         </p>
+        <p>
+          Are you an admin?{" "}
+          <span
+            className="login-link"
+            onClick={() => (window.location.pathname = "/admin-register")}
+          >
+            Register as Admin
+          </span>
+        </p>
       </form>
     </div>
   );

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "../api";
-import "./Login.css"; // External CSS for styling
+import "./Register.css";
 
-const Login = ({ onLogin }) => {
+const AdminRegister = ({ onRegistered }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -11,23 +11,22 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
     setError("");
     try {
-      const res = await axios.post("/auth/login", { email, password });
-      localStorage.setItem("token", res.data.token);
-      onLogin();
+      await axios.post("/auth/admin/register", { email, password });
+      onRegistered(); // Redirect to admin login
     } catch (err) {
-      setError(err.response?.data?.message || "Login failed");
+      setError(err.response?.data?.message || "Admin registration failed");
     }
   };
 
   return (
-    <div className="login-container">
-      <form className="login-form" onSubmit={handleSubmit}>
-        <h2>Welcome Back</h2>
-        <p className="subtitle">Please login to your account</p>
+    <div className="register-container">
+      <form className="register-form" onSubmit={handleSubmit}>
+        <h2>Admin Registration</h2>
+        <h3 className="subtitle">Create an admin account</h3>
 
         <input
           type="email"
-          placeholder="Email"
+          placeholder="Admin Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -35,30 +34,28 @@ const Login = ({ onLogin }) => {
         />
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Admin Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
           className="input-field"
         />
 
-        <button type="submit" className="login-button">
-          Login
-        </button>
+        <button type="submit" className="register-button">Register as Admin</button>
+
+        {error && <p className="error-message">{error}</p>}
         <p>
-          Admin access?{" "}
+          Already an admin?{" "}
           <span
             className="login-link"
             onClick={() => (window.location.pathname = "/admin-login")}
           >
-            Login as Admin
+            Login here
           </span>
         </p>
-
-        {error && <p className="error-message">{error}</p>}
       </form>
     </div>
   );
 };
 
-export default Login;
+export default AdminRegister;
